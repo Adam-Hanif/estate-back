@@ -9,9 +9,11 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(require('./routes/estate.route'))
 
 mongoose
   .connect(process.env.MONGO_SERVER)
+  
   .then(() => console.log("mongoose connect"))
   .catch(() => console.log("mongoose warning"));
 
