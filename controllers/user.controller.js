@@ -2,6 +2,7 @@ const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 
 module.exports.userController = {
+
   getUser: async (req, res) => {
     try {
       const users = await User.find();
@@ -22,6 +23,7 @@ module.exports.userController = {
         email,
         password: hashPassword,
         estate: req.params.id,
+        favorites: req.params.id
       });
       res.json(user);
     } catch (error) {
