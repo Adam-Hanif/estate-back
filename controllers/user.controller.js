@@ -3,6 +3,15 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 module.exports.userController = {
+  getMe: async (req, res) => {
+    const usertoken = req.headers.authorization;
+    const token = usertoken.split(' ');
+    const decoded = jwt.verify(token[1], process.env.SECRET_JWT_KEY);
+
+    const user = await User.findById(decoded.id);
+
+    res.json(user);
+  },
   getUser: async (req, res) => {
     try {
       const users = await User.find();
